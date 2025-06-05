@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rytmy Dnia - Nowości Muzyczne</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">RYTMY DNIA</h1>
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link">Kontakt</a></li>
+                    <li><a href="#" class="nav-link">O stronie</a></li>
+                    <li><a href="#" class="nav-link">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="hero-section">
+                <img src="main.png" alt="Nowości Muzyczne" class="main-image">
+            </section>
+
+            <section class="announcement-section">
+                <div class="announcement-text">
+                    <p><strong class="main-greeting">Hej! Z tej strony Wasz ulubiony muzyczny portal - "Rytmy Dnia".</strong><br>
+                    Sprzedaż biletów na koncert Jennifer Lopez już trwa, możecie je kupić na stronie Bilet Serwis. Zapraszamy do zapoznania się z ofertą!</p>
+                </div>
+            </section>
+
+            <section class="carousel-section">
+                <div class="carousel-container">
+                    <button class="carousel-btn prev-btn" id="prevBtn">&#10094;</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <img src="billie-eilish.png" alt="Billie Eilish" class="carousel-image">
+                            </div>
+                            <div class="carousel-slide active">
+                                <img src="jennifer-lopez.png" alt="Jennifer Lopez" class="carousel-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="sabrina-carpenter.png" alt="Sabrina Carpenter" class="carousel-image">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <button class="carousel-btn next-btn" id="nextBtn">&#10095;</button>
+                </div>
+                <div class="carousel-indicators">
+                    <button class="indicator active" data-slide="0"></button>
+                    <button class="indicator" data-slide="1"></button>
+                    <button class="indicator" data-slide="2"></button>
+                </div>
+            </section>  
+            
+            <section class="photo-blocks-section">
+                <div class="photo-blocks-container">
+                    <!-- Блок 1 -->
+                    <div class="photo-block">
+                        <h3 class="block-title">NEWS</h3>
+                        <div class="block-image-container">
+                            <img src="lopez2.jpg" alt="Jennifer Lopez" class="block-image" id="block1Image">
+                            <p class="block-caption">Kolejna wielka gwiazda popu przyjeżdża do Polski</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Блок 2 -->
+                    <div class="photo-block">
+                        <h3 class="block-title">GŁÓWKA</h3>
+                        <div class="block-image-container">
+                            <img src="2.jpg" alt="Rachel Zegler" class="block-image" id="block2Image">
+                        </div>
+                    </div>
+                    
+                    <!-- Блок 3 -->
+                    <div class="photo-block">
+                        <h3 class="block-title">SYLWETKA</h3>
+                        <div class="block-image-container">
+                            <img src="3.jpg" alt="Sabrina Carpenter" class="block-image" id="block3Image">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal windows -->
+    <div id="artistModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="" class="modal-image">
+                <div class="modal-text">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDescription">Opis będzie wkrótce dostępny...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lopez News Modal -->
+    <div id="lopezNewsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="lopezModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="lopez2.jpg" alt="Jennifer Lopez News" class="modal-image">
+                <div class="modal-text">
+                    <h2>Jennifer Lopez</h2>
+                    <p>Jennifer Lopez ogłosiła, że wyrusza w międzynarodową trasę koncertową "Up All Night", na której zaśpiewa swoje największe hity.<br><br>
+                    Koncert w Warszawie odbędzie się już 25 lipca 2025 roku o 20:00 na PGE Narodowym.<br><br>
+                    Sprzedaż biletów już trwa na stronie Bilet Serwis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lopez Info Modal -->
+    <div id="lopezInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="lopezInfoModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="2.jpg" alt="Jennifer Lopez Info" class="modal-image">
+                <div class="modal-text">
+                    <h2>Jennifer Lopez</h2>
+                    <p>Jennifer Lopez ogłosiła, że wyrusza w międzynarodową trasę koncertową "Up All Night", na której zaśpiewa swoje największe hity.<br><br>
+                    Koncert w Warszawie odbędzie się już 25 lipca 2025 roku o 20:00 na PGE Narodowym.<br><br>
+                    Sprzedaż biletów już trwa na stronie Bilet Serwis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для блока 1 (Jennifer Lopez) -->
+    <div id="block1Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="block1ModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="lopez2.jpg" alt="Jennifer Lopez News" class="modal-image">
+                <div class="modal-text">
+                    <h2>Jennifer Lopez</h2>
+                    <p>Jennifer Lopez ogłosiła, że wyrusza w międzynarodową trasę koncertową "Up All Night", na której zaśpiewa swoje największe hity.<br><br>
+                    Koncert w Warszawie odbędzie się już 25 lipca 2025 roku o 20:00 na PGE Narodowym.<br><br>
+                    Sprzedaż biletów już trwa na stronie Bilet Serwis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для блока 2 (Rachel Zegler) -->
+    <div id="block2Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="block2ModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="2.jpg" alt="Rachel Zegler" class="modal-image">
+                <div class="modal-text">
+                    <h2>Rachel Zegler</h2>
+                    <p>Rachel Zegler znów zachwyca swoimi wokalnymi umiejętnościami.<br><br>
+                    Dwudziestotrzyletnia aktorka znana z "West Side Story" i "Ballady Ptaków i Węży", w najnowszej "Śnieżce" czaruje swoim głosem, udowadniając, że śpiew to jej pasja.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для блока 3 (Sabrina Carpenter) -->
+    <div id="block3Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="block3ModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="3.jpg" alt="Sabrina Carpenter" class="modal-image">
+                <div class="modal-text">
+                    <h2>Sabrina Carpenter</h2>
+                    <p>Sabrina Carpenter (ur. 1999 r. w Pensylwanii, USA) to amerykańska piosenkarka i aktorka. Swoją popularność zawdzięcza roli Mai Hart w serialu Disney Channel "Dziewczyna poznaje świat" (2014–2017).<br><br> 
+                    W 2015 roku wydała swój debiutancki album "Eyes Wide Open", który zapoczątkował jej drogę jako wokalistki popowej. Carpenter znana jest z emocjonalnych tekstów, chwytliwych melodii i umiejętnego łączenia stylów muzycznych, takich jak pop, dance-pop i R&B. Jej kolejne albumy – m.in. "Evolution", "Singular Act I i II", a także "Emails I Can't Send" – spotkały się z pozytywnym odbiorem zarówno krytyków, jak i fanów.<br><br>
+                    Jej rozpoznawalność znacząco wzrosła po wydaniu piosenki "Espresso", która stała się viralowym hitem. Dzięki temu, wyruszyła w światową trasę koncertową "Short 'n Sweet Tour", podczas której zachwycała swoimi nietuzinkowymi strojami, przypominającymi bieliznę i piżamy.<br><br>
+                    Artystka często porusza w swojej twórczości tematy dojrzewania, samoakceptacji, relacji i tożsamości. Jednak poza działalnością muzyczną i aktorską, Sabrina angażuje się także społecznie, wspierając inicjatywy na rzecz zdrowia psychicznego i praw kobiet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <video controls width="600">
+            <source src="IMG_2913.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
