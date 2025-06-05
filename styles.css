@@ -1,3 +1,15 @@
+/* Image loading improvements */
+img {
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+img[src*=".png"], img[src*=".jpg"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    min-height: 50px;
+}
+
 /* Root variables for colors */
 :root {
     --primary-gradient: linear-gradient(135deg, 
@@ -134,8 +146,11 @@ body::before {
 }
 
 .logo-image {
-    height: 100px;
+    height: 80px;
     width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    display: block;
 }
 
 /* Navigation Styles */
@@ -184,10 +199,15 @@ body::before {
 
 .main-image {
     max-width: 100%;
+    width: 100%;
     height: auto;
+    max-height: 500px;
+    object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
 }
 
 .main-image:hover {
