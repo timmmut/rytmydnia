@@ -1,273 +1,228 @@
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Получаем все навигационные ссылки
-    const navLinks = document.querySelectorAll('.nav-link');
+    // Инициализация компонентов
+    initNavigationArrows();
+    initCarousel();
+    initModals();
+    initNavLinks();
     
-    // Добавляем обработчики событий для навигационных ссылок
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Получаем текст ссылки для определения действия
-            const linkText = this.textContent;
-            
-            // Временные заглушки для навигационных кнопок
-            switch(linkText) {
-                case 'Kontakt':
-                    alert('Strona kontaktowa będzie wkrótce dostępna!');
-                    break;
-                case 'O stronie':
-                    alert('Informacje o stronie będą wkrótce dostępne!');
-                    break;
-                case 'Blog':
-                    alert('Blog będzie wkrótce dostępny!');
-                    break;
-                default:
-                    alert('Strona w budowie!');
-            }
-        });
-    });
-    
-    // Простая анимация появления элементов при скролле
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Наблюдаем за главным изображением
-    const mainImage = document.querySelector('.main-image');
-    if (mainImage) {
-        mainImage.style.opacity = '0';
-        mainImage.style.transform = 'translateY(30px)';
-        mainImage.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(mainImage);
-    }
-
-    // Carousel functionality
-    class Carousel {
-        constructor() {
-            this.currentSlide = 0;
-            this.slides = document.querySelectorAll('.carousel-slide');
-            this.totalSlides = this.slides.length;
-            this.track = document.querySelector('.carousel-track');
-            this.indicators = document.querySelectorAll('.indicator');
-            this.prevBtn = document.getElementById('prevBtn');
-            this.nextBtn = document.getElementById('nextBtn');
-            
-            if (this.slides.length > 0) {
-                this.init();
-            }
-        }
+    // === НАВИГАЦИОННЫЕ СТРЕЛКИ ===
+    function initNavigationArrows() {
+        const navArrows = document.querySelectorAll('.nav-arrow');
+        const sections = document.querySelectorAll('section, footer');
         
-        init() {
-            this.updateCarousel();
-            this.bindEvents();
-        }
-        
-        bindEvents() {
-            if (this.prevBtn) {
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-            }
-            
-            if (this.nextBtn) {
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
-            }
-            
-            this.indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => this.goToSlide(index));
-            });
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') this.prevSlide();
-                if (e.key === 'ArrowRight') this.nextSlide();
-            });
-            
-            // Touch support for mobile
-            let startX = 0;
-            let endX = 0;
-            
-            if (this.track) {
-                this.track.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                });
+        // Smooth scroll для навигационных стрелок
+        navArrows.forEach(arrow => {
+            arrow.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
                 
-                this.track.addEventListener('touchend', (e) => {
-                    endX = e.changedTouches[0].clientX;
-                    const difference = startX - endX;
-                    
-                    if (Math.abs(difference) > 50) {
-                        if (difference > 0) {
-                            this.nextSlide();
-                        } else {
-                            this.prevSlide();
-                        }
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Активация стрелок при скролле
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '-10% 0px -10% 0px'
+        };
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const sectionId = entry.target.id;
+                const correspondingArrow = document.querySelector(`[data-section="${sectionId}"]`);
+                
+                if (correspondingArrow) {
+                    if (entry.isIntersecting) {
+                        correspondingArrow.classList.add('active');
+                    } else {
+                        correspondingArrow.classList.remove('active');
                     }
-                });
-            }
-        }
-        
-        updateCarousel() {
-            // Просто обновляем активные классы - позиционирование теперь через CSS
-            this.slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === this.currentSlide);
+                }
             });
-            
-            // Update indicators
-            this.indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === this.currentSlide);
-            });
-        }
+        }, observerOptions);
         
-        nextSlide() {
-            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-            this.updateCarousel();
-        }
-        
-        prevSlide() {
-            this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-            this.updateCarousel();
-        }
-        
-        goToSlide(index) {
-            this.currentSlide = index;
-            this.updateCarousel();
-        }
-
-    }
-
-    // Initialize carousel
-    new Carousel();
-
-    // Lopez News Modal functionality
-    const lopezNewsImage = document.getElementById('lopezNewsImage');
-    const lopezNewsModal = document.getElementById('lopezNewsModal');
-    const lopezModalClose = document.getElementById('lopezModalClose');
-
-    if (lopezNewsImage && lopezNewsModal) {
-        lopezNewsImage.addEventListener('click', function() {
-            lopezNewsModal.style.display = 'block';
-        });
-    }
-
-    if (lopezModalClose) {
-        lopezModalClose.addEventListener('click', function() {
-            lopezNewsModal.style.display = 'none';
-        });
-    }
-
-    // Lopez Info Modal functionality
-    const infoLopezImage = document.getElementById('infoLopezImage');
-    const lopezInfoModal = document.getElementById('lopezInfoModal');
-    const lopezInfoModalClose = document.getElementById('lopezInfoModalClose');
-    const clickableTexts = document.querySelectorAll('.clickable-text');
-
-    if (infoLopezImage && lopezInfoModal) {
-        infoLopezImage.addEventListener('click', function() {
-            lopezInfoModal.style.display = 'block';
-        });
-    }
-
-    // Add click functionality to GŁÓWKA words
-    clickableTexts.forEach(function(text) {
-        text.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-modal');
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'block';
+        sections.forEach(section => {
+            if (section.id) {
+                sectionObserver.observe(section);
             }
         });
-    });
-
-    if (lopezInfoModalClose) {
-        lopezInfoModalClose.addEventListener('click', function() {
-            lopezInfoModal.style.display = 'none';
+    }
+    
+    // === FLICKITY КАРУСЕЛЬ ===
+    function initCarousel() {
+        const mainGallery = document.querySelector('.gallery-main');
+        if (mainGallery) {
+            new Flickity(mainGallery, {
+                wrapAround: true,
+                cellAlign: 'center',
+                pageDots: true,
+                prevNextButtons: true,
+                contain: false,
+                groupCells: false,
+                freeScroll: false,
+                percentPosition: false
+            });
+            console.log('Главная карусель инициализирована');
+        }
+    }
+    
+    // === МОДАЛЬНЫЕ ОКНА ===
+    function initModals() {
+        const modals = document.querySelectorAll('.modal');
+        const modalTriggers = document.querySelectorAll('[id$="Image"], #image22-clickable');
+        const closeButtons = document.querySelectorAll('.close');
+        
+        // Открытие модальных окон
+        modalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const triggerId = this.id;
+                let modalId = '';
+                
+                // Определяем соответствующее модальное окно
+                if (triggerId.includes('block1')) {
+                    modalId = 'block1Modal';
+                } else if (triggerId.includes('block2')) {
+                    modalId = 'block2Modal';
+                } else if (triggerId.includes('block3')) {
+                    modalId = 'block3Modal';
+                } else if (triggerId === 'image22-clickable') {
+                    modalId = 'image22Modal';
+                }
+                
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Закрытие модальных окон
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Закрытие по клику вне модального окна
+        modals.forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+        
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const openModal = document.querySelector('.modal[style*="block"]');
+                if (openModal) {
+                    openModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+    }
+    
+    // === НАВИГАЦИОННЫЕ ССЫЛКИ В HEADER ===
+    function initNavLinks() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const linkText = this.textContent;
+                
+                switch(linkText) {
+                    case 'Kontakt':
+                        alert('Strona kontaktowa będzie wkrótce dostępna!');
+                        break;
+                    case 'O stronie':
+                        alert('Informacje o stronie będą wkrótce dostępne!');
+                        break;
+                    case 'Blog':
+                        alert('Blog będzie wkrótce dostępny!');
+                        break;
+                    default:
+                        alert('Strona w budowie!');
+                }
+            });
         });
     }
 
-    // Close modal when clicking outside of it
-    window.addEventListener('click', function(event) {
-        if (event.target === lopezNewsModal) {
-            lopezNewsModal.style.display = 'none';
-        }
-        if (event.target === lopezInfoModal) {
-            lopezInfoModal.style.display = 'none';
-        }
-    });
-
-    // Получаем элементы блоков и модальных окон
+    // === ДОПОЛНИТЕЛЬНАЯ ЛОГИКА МОДАЛЬНЫХ ОКОН ===
+    // Modal logic for photo blocks
     const block1Image = document.getElementById('block1Image');
-    const block2Image = document.getElementById('block2Image');
-    const block3Image = document.getElementById('block3Image');
-    
     const block1Modal = document.getElementById('block1Modal');
-    const block2Modal = document.getElementById('block2Modal');
-    const block3Modal = document.getElementById('block3Modal');
-    
     const block1ModalClose = document.getElementById('block1ModalClose');
+    
+    const block2Image = document.getElementById('block2Image');
+    const block2Modal = document.getElementById('block2Modal');
     const block2ModalClose = document.getElementById('block2ModalClose');
+    
+    const block3Image = document.getElementById('block3Image');
+    const block3Modal = document.getElementById('block3Modal');
     const block3ModalClose = document.getElementById('block3ModalClose');
     
-    // Добавляем обработчики событий для открытия модальных окон
-    if (block1Image && block1Modal) {
-        block1Image.addEventListener('click', function() {
+    if (block1Image && block1Modal && block1ModalClose) {
+        block1Image.addEventListener('click', () => {
             block1Modal.style.display = 'block';
         });
+
+        block1ModalClose.addEventListener('click', () => {
+            block1Modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === block1Modal) {
+                block1Modal.style.display = 'none';
+            }
+        });
     }
-    
-    if (block2Image && block2Modal) {
-        block2Image.addEventListener('click', function() {
+
+    if (block2Image && block2Modal && block2ModalClose) {
+        block2Image.addEventListener('click', () => {
             block2Modal.style.display = 'block';
         });
+
+        block2ModalClose.addEventListener('click', () => {
+            block2Modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === block2Modal) {
+                block2Modal.style.display = 'none';
+            }
+        });
     }
-    
-    if (block3Image && block3Modal) {
-        block3Image.addEventListener('click', function() {
+
+    if (block3Image && block3Modal && block3ModalClose) {
+        block3Image.addEventListener('click', () => {
             block3Modal.style.display = 'block';
         });
-    }
-    
-    // Добавляем обработчики событий для закрытия модальных окон
-    if (block1ModalClose) {
-        block1ModalClose.addEventListener('click', function() {
-            block1Modal.style.display = 'none';
-        });
-    }
-    
-    if (block2ModalClose) {
-        block2ModalClose.addEventListener('click', function() {
-            block2Modal.style.display = 'none';
-        });
-    }
-    
-    if (block3ModalClose) {
-        block3ModalClose.addEventListener('click', function() {
+
+        block3ModalClose.addEventListener('click', () => {
             block3Modal.style.display = 'none';
         });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === block3Modal) {
+                block3Modal.style.display = 'none';
+            }
+        });
     }
-    
-    // Закрытие модальных окон при клике вне их содержимого
-    window.addEventListener('click', function(event) {
-        if (event.target === block1Modal) {
-            block1Modal.style.display = 'none';
-        }
-        if (event.target === block2Modal) {
-            block2Modal.style.display = 'none';
-        }
-        if (event.target === block3Modal) {
-            block3Modal.style.display = 'none';
-        }
-    });
 });
 
 // Функция для плавного скролла
@@ -275,7 +230,7 @@ function smoothScroll(target) {
     const element = document.querySelector(target);
     if (element) {
         element.scrollIntoView({
-        behavior: 'smooth'
-    });
+            behavior: 'smooth'
+        });
     }
 } 

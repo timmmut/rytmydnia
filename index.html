@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rytmy Dnia - Nowości Muzyczne</title>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Floating Navigation Arrows -->
+    <nav class="page-navigation">
+        <a href="#hero" class="nav-arrow" data-section="hero" title="Główne zdjęcie">
+            ↑
+        </a>
+        <a href="#announcement" class="nav-arrow" data-section="announcement" title="Ogłoszenia">
+            📢
+        </a>
+        <a href="#carousel" class="nav-arrow" data-section="carousel" title="Karuzela">
+            🎵
+        </a>
+        <a href="#blocks" class="nav-arrow" data-section="blocks" title="Nowości">
+            📰
+        </a>
+        <a href="#footer" class="nav-arrow" data-section="footer" title="Wideo">
+            🎬
+        </a>
+    </nav>
+
     <header class="header">
         <div class="container">
-            <h1 class="logo">RYTMY DNIA</h1>
+            <img src="images/logo.png" alt="Rytmy Dnia" class="logo-image">
             <nav class="navigation">
                 <ul class="nav-list">
                     <li><a href="#" class="nav-link">Kontakt</a></li>
@@ -22,50 +42,40 @@
 
     <main class="main-content">
         <div class="container">
-            <section class="hero-section">
-                <img src="main.png" alt="Nowości Muzyczne" class="main-image">
+            <section id="hero" class="hero-section">
+                <img src="images/main.png" alt="Nowości Muzyczne" class="main-image">
             </section>
 
-            <section class="announcement-section">
+            <section id="announcement" class="announcement-section">
                 <div class="announcement-text">
                     <p><strong class="main-greeting">Hej! Z tej strony Wasz ulubiony muzyczny portal - "Rytmy Dnia".</strong><br>
                     Sprzedaż biletów na koncert Jennifer Lopez już trwa, możecie je kupić na stronie Bilet Serwis. Zapraszamy do zapoznania się z ofertą!</p>
                 </div>
             </section>
+        </div>
 
-            <section class="carousel-section">
-                <div class="carousel-container">
-                    <button class="carousel-btn prev-btn" id="prevBtn">&#10094;</button>
-                    <div class="carousel-wrapper">
-                        <div class="carousel-track">
-                            <div class="carousel-slide">
-                                <img src="billie-eilish.png" alt="Billie Eilish" class="carousel-image">
-                            </div>
-                            <div class="carousel-slide active">
-                                <img src="jennifer-lopez.png" alt="Jennifer Lopez" class="carousel-image">
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="sabrina-carpenter.png" alt="Sabrina Carpenter" class="carousel-image">
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <button class="carousel-btn next-btn" id="nextBtn">&#10095;</button>
+        <section id="carousel" class="carousel-section">
+            <div class="gallery gallery-main js-flickity" data-flickity-options='{ "wrapAround": true, "cellAlign": "center", "pageDots": true, "prevNextButtons": true, "contain": false, "groupCells": false }'>
+                <div class="gallery-cell">
+                    <img src="images/billie-eilish.png" alt="Billie Eilish" class="carousel-image">
                 </div>
-                <div class="carousel-indicators">
-                    <button class="indicator active" data-slide="0"></button>
-                    <button class="indicator" data-slide="1"></button>
-                    <button class="indicator" data-slide="2"></button>
+                <div class="gallery-cell">
+                    <img src="images/jennifer-lopez.png" alt="Jennifer Lopez" class="carousel-image">
                 </div>
-            </section>  
-            
-            <section class="photo-blocks-section">
+                <div class="gallery-cell">
+                    <img src="images/sabrina-carpenter.png" alt="Sabrina Carpenter" class="carousel-image">
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="blocks" class="photo-blocks-section">
                 <div class="photo-blocks-container">
                     <!-- Блок 1 -->
                     <div class="photo-block">
                         <h3 class="block-title">NEWS</h3>
                         <div class="block-image-container">
-                            <img src="lopez2.jpg" alt="Jennifer Lopez" class="block-image" id="block1Image">
+                            <img src="images/lopez2.jpg" alt="Jennifer Lopez" class="block-image" id="block1Image">
                             <p class="block-caption">Kolejna wielka gwiazda popu przyjeżdża do Polski</p>
                         </div>
                     </div>
@@ -74,7 +84,7 @@
                     <div class="photo-block">
                         <h3 class="block-title">GŁÓWKA</h3>
                         <div class="block-image-container">
-                            <img src="2.jpg" alt="Rachel Zegler" class="block-image" id="block2Image">
+                            <img src="images/2.jpg" alt="Rachel Zegler" class="block-image" id="block2Image">
                         </div>
                     </div>
                     
@@ -82,7 +92,7 @@
                     <div class="photo-block">
                         <h3 class="block-title">SYLWETKA</h3>
                         <div class="block-image-container">
-                            <img src="3.jpg" alt="Sabrina Carpenter" class="block-image" id="block3Image">
+                            <img src="images/3.jpg" alt="Sabrina Carpenter" class="block-image" id="block3Image">
                         </div>
                     </div>
                 </div>
@@ -109,7 +119,7 @@
         <div class="modal-content">
             <span class="close" id="lopezModalClose">&times;</span>
             <div class="modal-body">
-                <img src="lopez2.jpg" alt="Jennifer Lopez News" class="modal-image">
+                <img src="images/lopez2.jpg" alt="Jennifer Lopez News" class="modal-image">
                 <div class="modal-text">
                     <h2>Jennifer Lopez</h2>
                     <p>Jennifer Lopez ogłosiła, że wyrusza w międzynarodową trasę koncertową "Up All Night", na której zaśpiewa swoje największe hity.<br><br>
@@ -125,7 +135,7 @@
         <div class="modal-content">
             <span class="close" id="lopezInfoModalClose">&times;</span>
             <div class="modal-body">
-                <img src="2.jpg" alt="Jennifer Lopez Info" class="modal-image">
+                <img src="images/2.jpg" alt="Jennifer Lopez Info" class="modal-image">
                 <div class="modal-text">
                     <h2>Jennifer Lopez</h2>
                     <p>Jennifer Lopez ogłosiła, że wyrusza w międzynarodową trasę koncertową "Up All Night", na której zaśpiewa swoje największe hity.<br><br>
@@ -141,7 +151,7 @@
         <div class="modal-content">
             <span class="close" id="block1ModalClose">&times;</span>
             <div class="modal-body">
-                <img src="lopez2.jpg" alt="Jennifer Lopez News" class="modal-image">
+                <img src="images/lopez2.jpg" alt="Jennifer Lopez News" class="modal-image">
                 <div class="modal-text">
                     <h2>Jennifer Lopez</h2>
                     <p>Jennifer Lopez ogłosiła, że wyrusza w międzynarodową trasę koncertową "Up All Night", na której zaśpiewa swoje największe hity.<br><br>
@@ -157,7 +167,7 @@
         <div class="modal-content">
             <span class="close" id="block2ModalClose">&times;</span>
             <div class="modal-body">
-                <img src="2.jpg" alt="Rachel Zegler" class="modal-image">
+                <img src="images/2.jpg" alt="Rachel Zegler" class="modal-image">
                 <div class="modal-text">
                     <h2>Rachel Zegler</h2>
                     <p>Rachel Zegler znów zachwyca swoimi wokalnymi umiejętnościami.<br><br>
@@ -172,7 +182,7 @@
         <div class="modal-content">
             <span class="close" id="block3ModalClose">&times;</span>
             <div class="modal-body">
-                <img src="3.jpg" alt="Sabrina Carpenter" class="modal-image">
+                <img src="images/3.jpg" alt="Sabrina Carpenter" class="modal-image">
                 <div class="modal-text">
                     <h2>Sabrina Carpenter</h2>
                     <p>Sabrina Carpenter (ur. 1999 r. w Pensylwanii, USA) to amerykańska piosenkarka i aktorka. Swoją popularność zawdzięcza roli Mai Hart w serialu Disney Channel "Dziewczyna poznaje świat" (2014–2017).<br><br> 
@@ -184,13 +194,51 @@
         </div>
     </div>
 
-    <footer>
-        <video controls width="600">
-            <source src="IMG_2913.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-        </video>
+    <footer id="footer">
+        <h2 class="gallery-title">Recenzji do albumów</h2>
+        <section class="reviews-gallery-section">
+            <div class="reviews-gallery-container">
+                <div class="review-item">
+                    <img src="images/22.png" alt="Photo 22" class="review-image" id="image22-clickable">
+                </div>
+                <div class="review-item">
+                    <img src="images/11.png" alt="Photo 11" class="review-image">
+                </div>
+                <div class="review-item">
+                    <img src="images/33.png" alt="Photo 33" class="review-image">
+                </div>
+                <div class="review-item">
+                    <img src="images/66.png" alt="Photo 44" class="review-image">
+                </div>
+            </div>
+        </section>
+
+        <div class="video-section">
+            <h2 class="video-title">WYWIAD</h2>
+            <div class="video-container">
+                <video controls class="video-player">
+                    <source src="images/IMG_2913.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+        </div>
     </footer>
 
+    <!-- Modal for image 22 -->
+    <div id="image22Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="image22ModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="images/22.png" alt="Photo 22" class="modal-image">
+                <div class="modal-text">
+                    <h2>Tytuł recenzji</h2>
+                    <p>Tutaj pojawi się tekst recenzji albumu...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 
