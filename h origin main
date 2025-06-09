@@ -1,0 +1,4 @@
+[33mc49ce24[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Обновления модальных окон: добавлены тексты для фото и удален блок NEWS
+[33m74b37c3[m Fix image loading issues: optimize CSS for logo and main image display
+[33m3f2da60[m[33m ([m[1;31morigin/main[m[33m)[m Update project: reorganize images and update main files
+[33mfd7d5a5[m Initial commit
