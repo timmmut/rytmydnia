@@ -1,3 +1,53 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* News Ticker Styles */
+.news-ticker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    z-index: 1001;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-content {
+    white-space: nowrap;
+    color: #ffffff;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    letter-spacing: 0.8px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    animation: scroll-left 15s linear infinite;
+    padding-left: 100%;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.news-ticker:hover .ticker-content {
+    animation-play-state: paused;
+}
+
+
+
 /* Image loading improvements */
 img {
     image-rendering: auto;
@@ -13,7 +63,7 @@ img[src*=".png"], img[src*=".jpg"] {
 /* Root variables for colors */
 :root {
     --primary-gradient: linear-gradient(135deg, 
-        rgba(227, 234, 102, 0.9) 0%, 
+        rgba(229, 173, 88, 0.9) 0%, 
         rgba(170, 132, 208, 0.8) 25%,
         rgba(255, 154, 158, 0.7) 50%,
         rgba(254, 207, 239, 0.8) 75%,
@@ -48,6 +98,7 @@ body {
     color: white;
     overflow-x: hidden;
     position: relative;
+    padding-top: 55px;
 }
 
 body::before {
@@ -130,27 +181,214 @@ body::before {
 
 /* Header Styles */
 .header {
-    padding: 15px 0;
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: var(--blur-effect);
-    position: sticky;
-    top: 0;
+    height: 60px;
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    position: static;
     z-index: 999;
 }
 
 .header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.logo-image {
-    height: 80px;
+/* About Section with Logo */
+.about-with-logo {
+    margin: 60px 0;
+    padding: 0;
+    background: none;
+}
+
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-logo {
+    height: 300px;
     width: auto;
-    max-width: 200px;
+    max-width: 600px;
     object-fit: contain;
-    display: block;
+    flex-shrink: 0;
+    background: none !important;
+    background-color: transparent !important;
+    margin-left: -180px;
+    position: relative;
+}
+
+/* Falling Star Animation Container */
+.about-logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Falling Star */
+.about-logo::after {
+    content: '⭐';
+    position: absolute;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 2;
+    animation: fallingStarOrbit 4s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+
+/* Star Orbit Animation */
+@keyframes fallingStarOrbit {
+    0% {
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    25% {
+        top: 25%;
+        left: 85%;
+        transform: translateX(-50%) rotate(90deg);
+    }
+    50% {
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg);
+    }
+    75% {
+        top: 75%;
+        left: 15%;
+        transform: translateX(-50%) rotate(270deg);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Star Trail Effect */
+.about-content::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    border-radius: 50%;
+    animation: trailRotate 4s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Additional trail particles */
+.about-content::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        transparent 60%
+    );
+    border-radius: 50%;
+    animation: trailPulse 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes trailRotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) rotate(90deg) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+    }
+    75% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) rotate(270deg) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes trailPulse {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(1.3);
+    }
+}
+
+
+
+/* Make sure content stays positioned */
+.about-content {
+    position: relative;
+}
+
+.about-text {
+    flex: 1;
+    color: white;
+}
+
+.about-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+    line-height: 1.4;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Navigation Styles */
@@ -170,20 +408,28 @@ body::before {
     color: white;
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 500;
-    padding: 12px 20px;
-    border-radius: 30px;
-    background: var(--light-overlay);
-    border: 2px solid transparent;
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.08) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-    backdrop-filter: var(--blur-effect);
+    backdrop-filter: blur(15px);
     white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.3px;
 }
 
 .nav-link:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0.18) 100%);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Main Content Styles */
@@ -221,8 +467,8 @@ body::before {
     background: linear-gradient(135deg, 
         rgba(102, 126, 234, 0.8) 0%, 
         rgba(118, 75, 162, 0.7) 25%,
-        rgba(196, 118, 35, 0.6) 50%,
-        rgba(254, 207, 239, 0.7) 75%,
+        rgba(125, 60, 138, 0.6) 50%,
+        
         rgba(102, 126, 234, 0.8) 100%);
     border-radius: 20px;
     padding: 30px;
@@ -310,17 +556,65 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: -100px;
+    margin-right: -150px;
+}
+
+.carousel-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 70%;
 }
 
 .carousel-image {
     width: 100%;
-    max-width: 500px;
-    height: 70%;
+    height: 100%;
     object-fit: cover;
     border-radius: 0;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-    transition: all 0.6s ease;
+    transition: all 0.1s ease;
+}
+
+/* Все изображения теперь в контейнерах */
+
+.carousel-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    padding: 40px 15px 15px 15px;
+    pointer-events: none;
+}
+
+.carousel-image-text {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+}
+
+.carousel-image-timestamp {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    z-index: 2;
 }
 
 
@@ -439,6 +733,35 @@ body::before {
     background: white;
     transform: scale(1.3);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Video Modal Styles */
+.video-modal-content {
+    max-width: 1600px;
+    width: 98%;
+}
+
+.video-modal-body {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.video-modal-container {
+    flex: 3;
+    max-width: 75%;
+    background: transparent;
+}
+
+.modal-video-player {
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: none;
+    background: transparent;
+    aspect-ratio: 16/9;
 }
 
 /* Photo Blocks Section */
@@ -748,6 +1071,73 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .video-modal-body {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .video-modal-container {
+        max-width: 100%;
+    }
+    
+    .modal-video-player {
+        aspect-ratio: 16/9;
+    }
+
+    .news-ticker {
+        height: 50px;
+    }
+    
+    .ticker-content {
+        font-size: 15px;
+        padding: 0 15px;
+        animation-duration: 12s;
+        letter-spacing: 0.6px;
+    }
+    
+    body {
+        padding-top: 50px;
+    }
+    
+    .header {
+        padding: 8px 0;
+    }
+    
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
+    }
+    
+    .about-logo {
+        height: 100px;
+        max-width: 180px;
+        margin-left: 0;
+    }
+    
+    .about-logo::after {
+        font-size: 16px;
+    }
+    
+    .about-content::before {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .about-content::after {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .about-title {
+        font-size: 1.5rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+
     .page-navigation {
         right: 15px;
         gap: 10px;
@@ -808,9 +1198,27 @@ footer {
         width: 75%;
     }
     
-    .carousel-image {
+    .carousel-image-container {
         max-width: 450px;
         height: 70%;
+    }
+    
+    .carousel-image-container .carousel-image {
+        height: 100%;
+    }
+    
+
+    
+    .carousel-image-text {
+        font-size: 0.9rem;
+        padding: 30px 10px 10px 10px;
+    }
+    
+    .carousel-image-timestamp {
+        top: 10px;
+        left: 10px;
+        font-size: 0.7rem;
+        padding: 4px 8px;
     }
 
 
@@ -885,6 +1293,57 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .modal-video-player {
+        aspect-ratio: 16/9;
+    }
+
+    .news-ticker {
+        height: 45px;
+    }
+    
+    .ticker-content {
+        font-size: 14px;
+        padding: 0 10px;
+        animation-duration: 10s;
+        letter-spacing: 0.4px;
+    }
+    
+    body {
+        padding-top: 45px;
+    }
+    
+    .header {
+        padding: 7px 0;
+    }
+    
+    .about-logo {
+        height: 80px;
+        max-width: 150px;
+        margin-left: 0;
+    }
+    
+    .about-logo::after {
+        font-size: 14px;
+    }
+    
+    .about-content::before {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .about-content::after {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .about-title {
+        font-size: 1.3rem;
+    }
+    
+    .about-text p {
+        font-size: 0.95rem;
+    }
+
     .page-navigation {
         right: 10px;
         gap: 8px;
@@ -897,15 +1356,15 @@ footer {
     }
     
     .header {
-        padding: 12px 0;
+        padding: 6px 0;
     }
     
     .header .container {
-        gap: 12px;
+        gap: 8px;
     }
     
     .logo-image {
-        height: 50px;
+        height: 45px;
     }
     
     .nav-list {
@@ -914,9 +1373,9 @@ footer {
     }
     
     .nav-link {
-        font-size: 0.9rem;
-        padding: 8px 15px;
-        border-radius: 20px;
+        font-size: 0.95rem;
+        padding: 10px 18px;
+        border-radius: 22px;
     }
 
     .modal-content {
@@ -938,9 +1397,27 @@ footer {
         width: 50%;
     }
     
-    .carousel-image {
+    .carousel-image-container {
         max-width: 350px;
         height: 65%;
+    }
+    
+    .carousel-image-container .carousel-image {
+        height: 100%;
+    }
+    
+
+    
+    .carousel-image-text {
+        font-size: 0.8rem;
+        padding: 25px 8px 8px 8px;
+    }
+    
+    .carousel-image-timestamp {
+        top: 8px;
+        left: 8px;
+        font-size: 0.65rem;
+        padding: 3px 6px;
     }
 
 
@@ -980,12 +1457,51 @@ footer {
 
 /* Дополнительные улучшения для очень маленьких экранов */
 @media (max-width: 360px) {
-    .header {
-        padding: 10px 0;
+    .news-ticker {
+        height: 40px;
     }
     
-    .logo-image {
-        height: 45px;
+    .ticker-content {
+        font-size: 13px;
+        padding: 0 8px;
+        animation-duration: 8s;
+        letter-spacing: 0.3px;
+    }
+    
+    body {
+        padding-top: 40px;
+    }
+
+    .header {
+        padding: 6px 0;
+    }
+    
+    .about-logo {
+        height: 70px;
+        max-width: 130px;
+        margin-left: 0;
+    }
+    
+    .about-logo::after {
+        font-size: 12px;
+    }
+    
+    .about-content::before {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .about-content::after {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .about-title {
+        font-size: 1.2rem;
+    }
+    
+    .about-text p {
+        font-size: 0.9rem;
     }
     
     .nav-list {

@@ -2,10 +2,50 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // Инициализация компонентов
+    initNewsTicker();
     initNavigationArrows();
     initCarousel();
     initModals();
     initNavLinks();
+    
+    // === NEWS TICKER ===
+    function initNewsTicker() {
+        const tickerContent = document.getElementById('tickerContent');
+        if (!tickerContent) return;
+        
+        const newsItems = [
+            "Beyoncé bez wysiłku radzi sobie z nieszczęściem w szafie podczas swojego pokazu Cowboy Carter London",
+            "Sabrina Carpenter Summer 2.0 Rozpoczyna Się Nowym Singlem \"Manchild\": Streamuj Teraz",
+            "Ed Sheeran mówi po Pendżabsku w nowej piosence \"Sapphire,\" jego \"ulubiony\" utwór na nadchodzącym albumie \"Play\""
+        ];
+        
+        let currentIndex = 0;
+        
+        function switchNews() {
+            // Change to next news
+            currentIndex = (currentIndex + 1) % newsItems.length;
+            tickerContent.textContent = newsItems[currentIndex];
+        }
+        
+        // Determine animation duration based on screen size
+        function getAnimationDuration() {
+            const width = window.innerWidth;
+            if (width <= 360) return 8000;
+            if (width <= 480) return 10000;
+            if (width <= 768) return 12000;
+            return 15000;
+        }
+        
+        // Switch news based on animation duration
+        setInterval(switchNews, getAnimationDuration());
+        
+        // Update interval on window resize
+        let newsInterval = setInterval(switchNews, getAnimationDuration());
+        window.addEventListener('resize', () => {
+            clearInterval(newsInterval);
+            newsInterval = setInterval(switchNews, getAnimationDuration());
+        });
+    }
     
     // === НАВИГАЦИОННЫЕ СТРЕЛКИ ===
     function initNavigationArrows() {
@@ -71,6 +111,63 @@ document.addEventListener('DOMContentLoaded', function() {
                 percentPosition: false
             });
             console.log('Главная карусель инициализирована');
+            
+            // Добавляем обработчики кликов для всех фото в карусели
+            const carouselCells = mainGallery.querySelectorAll('.gallery-cell');
+            
+            // Первое фото
+            if (carouselCells.length >= 1) {
+                const firstCell = carouselCells[0];
+                firstCell.addEventListener('click', function() {
+                    const modal = document.getElementById('carousel1Modal');
+                    if (modal) {
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+                firstCell.style.cursor = 'pointer';
+                
+                const firstImage = firstCell.querySelector('.carousel-image');
+                if (firstImage) {
+                    firstImage.style.cursor = 'pointer';
+                }
+            }
+            
+            // Второе фото (с видео)
+            if (carouselCells.length >= 2) {
+                const secondCell = carouselCells[1];
+                secondCell.addEventListener('click', function() {
+                    const videoModal = document.getElementById('carouselVideoModal');
+                    if (videoModal) {
+                        videoModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+                secondCell.style.cursor = 'pointer';
+                
+                const secondImage = secondCell.querySelector('.carousel-image');
+                if (secondImage) {
+                    secondImage.style.cursor = 'pointer';
+                }
+            }
+            
+            // Третье фото
+            if (carouselCells.length >= 3) {
+                const thirdCell = carouselCells[2];
+                thirdCell.addEventListener('click', function() {
+                    const modal = document.getElementById('carousel3Modal');
+                    if (modal) {
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+                thirdCell.style.cursor = 'pointer';
+                
+                const thirdImage = thirdCell.querySelector('.carousel-image');
+                if (thirdImage) {
+                    thirdImage.style.cursor = 'pointer';
+                }
+            }
         }
     }
     
@@ -111,6 +208,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const modal = this.closest('.modal');
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
+                
+                // Останавливаем видео при закрытии модального окна
+                const video = modal.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
             });
         });
         
@@ -120,6 +224,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (e.target === this) {
                     this.style.display = 'none';
                     document.body.style.overflow = 'auto';
+                    
+                    // Останавливаем видео при закрытии модального окна
+                    const video = this.querySelector('video');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
                 }
             });
         });
@@ -131,6 +242,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (openModal) {
                     openModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
+                    
+                    // Останавливаем видео при закрытии модального окна
+                    const video = openModal.querySelector('video');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
                 }
             }
         });

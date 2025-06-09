@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- News ticker at the top -->
+    
+
     <!-- Floating Navigation Arrows -->
     <nav class="page-navigation">
         <a href="#hero" class="nav-arrow" data-section="hero" title="Główne zdjęcie">
@@ -15,6 +18,9 @@
         </a>
         <a href="#announcement" class="nav-arrow" data-section="announcement" title="Ogłoszenia">
             📢
+        </a>
+        <a href="#about" class="nav-arrow" data-section="about" title="O nas">
+            ℹ️
         </a>
         <a href="#carousel" class="nav-arrow" data-section="carousel" title="Karuzela">
             🎵
@@ -29,7 +35,6 @@
 
     <header class="header">
         <div class="container">
-            <img src="images/logo.png" alt="Rytmy Dnia" class="logo-image" loading="eager" onerror="this.style.display='none'">
             <nav class="navigation">
                 <ul class="nav-list">
                     <li><a href="#" class="nav-link">Kontakt</a></li>
@@ -39,9 +44,24 @@
             </nav>
         </div>
     </header>
+    <div class="news-ticker">
+        <div class="ticker-content" id="tickerContent">
+            Beyoncé bez wysiłku radzi sobie z nieszczęściem w szafie podczas swojego pokazu Cowboy Carter London
+        </div>
+    </div>
 
     <main class="main-content">
         <div class="container">
+            <section id="about" class="about-with-logo">
+                <div class="about-content">
+                    <img src="images/logo.png" alt="Rytmy Dnia" class="about-logo" loading="eager" onerror="this.style.display='none'">
+                    <div class="about-text">
+                        <h2 class="about-title">To my – Rytmy Dnia. Jeśli muzyka to Twoje powietrze, jesteś w dobrym miejscu.</h2>
+                        <p>Jesteśmy młodzieżowym portalem muzycznym tworzonym z pasji do dźwięku i ludzi. Publikujemy muzyczne newsy, rozmowy z osobami związanymi ze sceną muzyczną oraz recenzje najnowszych albumów i singli. Nasze treści kierujemy do młodych, którzy żyją muzyką i chcą odkrywać nowe brzmienia.</p>
+                        <p>Wspieramy różnorodność, promujemy młodych twórców i budujemy otwartą przestrzeń online. Znajdź swój rytm razem z nami.</p>
+                    </div>
+                </div>
+            </section>
             <section id="hero" class="hero-section">
                 <img src="images/main.png" alt="Nowości Muzyczne" class="main-image" loading="eager" onerror="this.style.display='none'">
             </section>
@@ -52,18 +72,40 @@
                     Sprzedaż biletów na koncert Jennifer Lopez już trwa, możecie je kupić na stronie Bilet Serwis. Zapraszamy do zapoznania się z ofertą!</p>
                 </div>
             </section>
+
+            
         </div>
 
         <section id="carousel" class="carousel-section">
+            <h2 class="carousel-title">NAJNOWSZE NEWSY</h2>
             <div class="gallery gallery-main js-flickity" data-flickity-options='{ "wrapAround": true, "cellAlign": "center", "pageDots": true, "prevNextButtons": true, "contain": false, "groupCells": false }'>
                 <div class="gallery-cell">
-                    <img src="images/billie-eilish.png" alt="Billie Eilish" class="carousel-image">
+                    <div class="carousel-image-container">
+                        <img src="images/IMG_2994.JPEG" alt="Photo 1" class="carousel-image">
+                        <div class="carousel-image-timestamp">Dodano 3 godziny temu</div>
+                        <div class="carousel-image-overlay">
+                            <p class="carousel-image-text">Popowa gwiazda Tate McRae wystąpiła z koncertem w Łodzi</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="gallery-cell">
-                    <img src="images/jennifer-lopez.png" alt="Jennifer Lopez" class="carousel-image">
+                    <div class="carousel-image-container">
+                        <img src="images/IMG_2996.JPG" alt="Photo 2" class="carousel-image">
+                        <div class="carousel-image-timestamp">Dodano 5 godzin temu</div>
+                        <div class="carousel-image-overlay">
+                            <p class="carousel-image-text">Koncerty Billie Eilish w Krakowie.<br>Tłumy fanów w Tauron Arenie także w drugi dzień!</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="gallery-cell">
-                    <img src="images/sabrina-carpenter.png" alt="Sabrina Carpenter" class="carousel-image">
+                    <div class="carousel-image-container">
+                        <img src="images/IMG_3001.JPG" alt="Photo 3" class="carousel-image">
+                        <div class="carousel-image-timestamp">Dodano 8 godzin temu</div>
+                        <div class="carousel-image-overlay">
+                            <p class="carousel-image-text">Kolejna wielka gwiazda popu przyjeżdża do Polski</p><br>
+                            <p></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -71,15 +113,6 @@
         <div class="container">
             <section id="blocks" class="photo-blocks-section">
                 <div class="photo-blocks-container">
-                    <!-- Блок 1 -->
-                    <div class="photo-block">
-                        <h3 class="block-title">NEWS</h3>
-                        <div class="block-image-container">
-                            <img src="images/lopez2.jpg" alt="Jennifer Lopez" class="block-image" id="block1Image">
-                            <p class="block-caption">Kolejna wielka gwiazda popu przyjeżdża do Polski</p>
-                        </div>
-                    </div>
-                    
                     <!-- Блок 2 -->
                     <div class="photo-block">
                         <h3 class="block-title">GŁÓWKA</h3>
@@ -233,6 +266,59 @@
                 <div class="modal-text">
                     <h2>Tytuł recenzji</h2>
                     <p>Tutaj pojawi się tekst recenzji albumu...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for first carousel image -->
+    <div id="carousel1Modal" class="modal">
+        <div class="modal-content video-modal-content">
+            <span class="close" id="carousel1ModalClose">&times;</span>
+            <div class="modal-body video-modal-body">
+                <div class="modal-text">
+                    <h2>Popowa gwiazda Tate McRae wystąpiła z koncertem w Łodzi</h2>
+                    <p>Ilustracje do materiału stanowią prywatne fotografie portalu Rytmy Dnia.</p>
+                </div>
+                <div class="video-modal-container">
+                    <video autoplay muted loop class="modal-video-player">
+                        <source src="images/IMG_3003.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for second carousel image (with video) -->
+    <div id="carouselVideoModal" class="modal">
+        <div class="modal-content video-modal-content">
+            <span class="close" id="carouselVideoModalClose">&times;</span>
+            <div class="modal-body video-modal-body">
+                <div class="modal-text">
+                    <h2>Koncerty Billie Eilish w Krakowie</h2>
+                    <p>Tłumy fanów w Tauron Arenie także w drugi dzień! Эксклюзивное видео с концерта...</p>
+                </div>
+                <div class="video-modal-container">
+                    <video autoplay muted loop class="modal-video-player">
+                        <source src="images/IMG_2991.MP4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for third carousel image -->
+    <div id="carousel3Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="carousel3ModalClose">&times;</span>
+            <div class="modal-body">
+                <img src="images/IMG_3001.JPG" alt="Photo 3" class="modal-image">
+                <div class="modal-text">
+                    <h2>Kolejna wielka gwiazda popu przyjeżdża do Polski</h2>
+                    <p>Jennifer Lopez, ikona muzyki pop i R&B, powraca do Polski z wyjątkowym koncertem. Artystka, znana z takich hitów jak "On The Floor", "Let's Get Loud" i "Jenny From The Block", zaprezentuje swoje największe przeboje w spektakularnym show.<br><br>
+                    Link do zdjęcia: https://pin.it/GHZz55sJS</p>
                 </div>
             </div>
         </div>
