@@ -788,15 +788,18 @@ body::before {
 
 .photo-blocks-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 40px;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .photo-block {
-    width: 100%;
+    flex: 1;
+    max-width: 450px;
     background: var(--light-overlay);
     border-radius: 15px;
     backdrop-filter: var(--blur-effect);
@@ -1294,14 +1297,16 @@ footer {
     }
 
     .photo-blocks-container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 25px;
         max-width: 400px;
         margin: 0 auto;
     }
 
     .photo-block {
+        flex: none;
         width: 100%;
+        max-width: none;
         margin-bottom: 0;
     }
     
@@ -1448,8 +1453,15 @@ footer {
     }
 
     .photo-blocks-container {
+        flex-direction: column;
         gap: 20px;
         max-width: 350px;
+    }
+
+    .photo-block {
+        flex: none;
+        width: 100%;
+        max-width: none;
     }
 
     .block-image {
@@ -1630,8 +1642,15 @@ footer {
     }
 
     .photo-blocks-container {
+        flex-direction: column;
         gap: 18px;
         max-width: 320px;
+    }
+
+    .photo-block {
+        flex: none;
+        width: 100%;
+        max-width: none;
     }
 
     .block-image {
@@ -1707,6 +1726,22 @@ footer {
 .review-image:hover {
     transform: scale(1.02);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive для photo-blocks на больших планшетах */
+@media (max-width: 1024px) {
+    .photo-blocks-container {
+        max-width: 900px;
+        gap: 30px;
+    }
+
+    .photo-block {
+        max-width: 400px;
+    }
+
+    .block-image {
+        height: 350px;
+    }
 }
 
 /* Responsive для галереи */
@@ -1848,8 +1883,15 @@ footer {
     }
 
     .photo-blocks-container {
+        flex-direction: column;
         gap: 15px;
         max-width: 300px;
+    }
+
+    .photo-block {
+        flex: none;
+        width: 100%;
+        max-width: none;
     }
 
     .block-image {
